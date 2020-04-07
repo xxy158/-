@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/jpg" sizes="144x144" href="./image/icon.jpg"/>
+    <link rel="stylesheet" href="./cssC/moren.css"/>
+    <link rel="stylesheet" href="./cssC/iconfont.css"/>
+    <link rel="stylesheet" href="./cssC/footer_evelator.css">
+    <title>游记分享</title>
+    <style>
+        /* 身体 */
+        .contence{
+            width: 15.2rem;
+            margin: 0 auto;
+            position: relative;
+        }
+        .home{
+            padding-top: 0.25rem;
+            padding-bottom: 0.2rem;
+            font-size: 0.25rem;
+            font-family: PingFangSC-Medium,PingFang SC;
+            font-weight: 500;
+            color: rgba(52,52,52,1);
+            border-bottom: 0.03rem solid rgba(17, 123, 241, 1);
+        }
+        .home a{
+            color:rgba(52,52,52,1);
+        }
+        .home a:hover{
+            color: rgba(17,123,241,1);
+        }
+        .home span{
+            color: rgba(17,123,241,1);
+        }
+        .online_search{
+            position: relative;
+            display: flex;
+            align-items: center;
+            width:12rem;
+            height:0.8rem;
+            line-height: 0.8rem;
+            background:rgba(255,255,255,1);
+            box-shadow:0rem 0rem 0.04rem 0rem rgba(0,0,0,0.15);
+            border-radius:0.04rem;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            margin: 0.25rem auto 0 auto;
+        }
+        .selectjob{
+            width: 1.6rem;
+            height: 0.6rem;
+            line-height: 0.6rem;
+            text-align: center;
+            box-sizing: border-box;
+            border: none;
+            border-right: 1px solid rgba(206,206,206,1);
+            font-size:0.2rem;
+            color:rgba(52,52,52,1);
+        }
+        .search_word{
+            width: 8.97rem;
+            font-size:0.18rem;
+            box-sizing: border-box;
+            padding-left: 0.2rem;
+            color:rgba(52,52,52,1);
+            
+        }
+        .search_word::placeholder{
+            color:rgba(151,151,151,1);
+        }
+        .tosee{
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            width:1.6rem;
+            height:0.8rem;
+            background:rgba(17,123,241,1);
+            box-shadow:0rem 0rem 0.1rem 0rem rgba(0,0,0,0.15);
+            border-radius:0rem 0.04rem 0.04rem 0rem;
+            font-size:0.2rem;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:rgba(255,255,255,1);
+        }
+        .tosee img{
+            width: 0.19rem;
+            height: 0.2rem;
+            padding-left: 0.45rem;
+            padding-right: 0.1rem;
+        }
+
+        body,html{
+            visibility: hidden;
+            background: rgb(243, 243, 243);
+        }
+        /* 头部 */
+        .header{
+            width: 100%;
+            z-index: 1000;
+            background: rgba(45,51,54,0.9);
+        }
+        .content {
+            width: 15.2rem;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 0.9rem;
+            line-height: 0.9rem;
+        }
+        .mainleft{
+            display: flex;
+            align-items: center;
+            color: #fff;
+        }
+        .logo{
+            font-size:0.2rem;
+            font-family:PingFangSC-Medium,PingFang SC;
+            font-weight:500;
+        }
+        ul.navlist {
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 0.2rem;
+            font-family: PingFangSC-Medium,PingFang SC;
+            font-weight: 500;
+        }
+        ul.navlist li {
+            cursor: pointer;
+            width: 1rem;
+            text-align: center;
+            margin-left: 0.4rem;
+        }
+        ul.navlist li.on{
+            font-family:PingFangSC-Semibold,PingFang SC;
+            font-weight:600;
+            color:rgba(17,123,241,1);
+        }
+        ul.navlist li.on::after{
+            display:block;
+            content: '';
+            position: absolute;
+            width:1rem;
+            height:0.1rem;
+            background:rgba(17,123,241,1);
+            top: 0;
+        }
+        ul.navlist li a {
+            width: 100%;
+            color: #fff;
+        }
+        ul.navlist li.on a{
+            font-family:PingFangSC-Semibold,PingFang SC;
+            font-weight:600;
+            color:rgba(17,123,241,1);
+        }
+        .login_register{
+            display: flex;
+            align-items: center;
+            font-size: 0.18rem;
+            font-family: PingFangSC-Regular,PingFang SC;
+            color: rgba(52,52,52,1);
+        }
+        .searchdetails{
+            margin-right: 0.4rem;
+            position: relative;
+            width:2.23rem;
+            height:0.5rem;
+            line-height: 0.5rem;
+            background:rgba(255,255,255,1);
+            border-radius:0.08rem;
+            border:0.02rem solid rgba(20,126,249,1);
+        }
+        .search{
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 0.2rem;
+        }
+        .search::placeholder{
+            font-size:0.16rem;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:rgba(151,151,151,1);
+        }
+        .searchdetails img{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0.2rem;
+            width: 0.15rem;
+            height: 0.16rem;
+            cursor: pointer;
+        }
+        .allregister{
+            display: flex;
+            align-items: center;
+            width:1.58rem;
+            height:0.5rem;
+            line-height: 0.23rem;
+            box-sizing: border-box;
+            padding: 0.11rem 0;
+            background:rgba(255,255,255,1);
+            border-radius:0.08rem;
+            border:0.02rem solid rgba(20,126,249,1);
+        }
+        .allregister span{
+            text-align: center;
+            width: 50%;
+            font-size:0.18rem;
+            font-family:PingFangSC-Regular,PingFang SC;
+            font-weight:400;
+            color:rgba(52,52,52,1);
+            cursor: pointer;
+        }
+        .allregister span.login{
+            border-right: 0.02rem solid rgba(20,126,249,1);
+        }
+        /* 资讯 */
+        .travlmess{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.43rem;
+        }
+        .rankingmessage{
+            width: 30%;
+            background: #fff;
+        }
+        .module_title{
+            font-size: 0.45rem;
+            height: 1.2rem;
+            line-height: 1.2rem;
+            text-align: center;
+            font-weight: bold;
+            background: #0b7cd2;
+            color: #ffffff;
+        }
+        .rankings{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.3rem 0 0.3rem 0.2rem;
+        }
+        .rankings>a{
+            padding: 0.2rem;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            vertical-align: top;
+            text-align: left;
+            border: 1px solid #e7e7e7;
+            color: #4c4c4c;
+            font-size: 0.3rem;
+            margin-top: 0.3rem;
+        }
+        .rankings>a:hover{
+            box-shadow: 0px 0px 0.05rem 0px rgba(0,0,0,.2);
+        }
+        .rankings>a:first-child{
+            margin-top: 0;
+        }
+
+
+        .messages {
+            position: relative;
+            width: 67%;
+        }
+        .messageEach{
+            width: 100%;
+            padding: 0.3rem;
+            box-sizing: border-box;
+            background: #fff;
+            margin-top: 0.1rem;
+
+        }
+        .messageEach li{
+            width: 100%;
+            height: 2.5rem;
+            box-sizing: border-box;
+            padding: 0.15rem 0.2rem;
+            border-bottom: 1px dashed rgb(243,243,243);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            border: 1px solid #e7e7e7;
+            white-space: nowrap;
+            margin-top: 0.4rem;
+        }
+        .messageEach li:hover{
+            box-shadow: 0px 0px 0.05rem 0px rgba(0,0,0,.2);
+        }
+        .messageEach li:first-child{
+            margin-top: 0;
+        }
+        .text_mess{
+            width: 70%;
+            font-size:0.22rem;
+            font-family:PingFangSC-Medium,PingFang SC;
+            font-weight:500;
+            color:rgba(52,52,52,1);
+            letter-spacing:1px;
+            padding-left: 0.3rem;
+        }
+        p.title_content {
+            font-size: 0.25rem;
+            font-weight: 600;
+            color: rgba(52,52,52,1);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        p.messscontent {
+            padding-top: 0.1rem;
+            text-indent: 2em;
+            white-space: pre-wrap;
+            text-align: justify;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        .createtime{
+            display: flex;
+            padding-top: 0.2rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .title_content:hover{
+            color:rgba(17, 123, 241, 1);
+        }
+        span.like {
+            display: flex;
+            align-items: center;
+        }
+        span.like img {
+            width: 0.3rem;
+            padding-right: 0.1rem;
+        }
+        .messageEach li>img{
+            width: 2.5rem;
+            height: 2.1rem;
+            border-radius: 4px;
+        }
+        .towrite{
+            position: absolute;
+            right: 0.1rem;
+            width: 1.7rem;
+            height: 0.6rem;
+            line-height: 0.6rem;
+            background-color: #ff9d00;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        span.iconfont.icon-edit {
+            font-size: 0.34rem;
+            line-height: 0.6rem;
+        }
+        .shraetop{
+            padding: 0 0.3rem;
+            height: 0.6rem;
+            font-size: 0.26rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: PingFangSC-Regular,PingFang SC;
+        }
+        .tablist{
+            display: flex;
+        }
+        .tablist li{
+            margin-left: 0.4rem;
+            padding-bottom: 0.1rem;
+            cursor: pointer;
+        }
+        
+        .tablist li.check{
+            border-bottom: 0.03rem solid #ff9d00;
+            color: #ff9d00;
+        }
+        .tablist li:first-child{
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <!-- <div class="header">
+        <div class="content">
+            <div class="mainleft">
+                <span class="logo">您好，兴游网 欢迎您</span>
+                <ul class="navlist">
+                    <li><a href="./main.html">首页</a></li>
+                    <li><a href="./recomment.html">热门推荐</a> </li>
+                    <li><a href="./message.html">旅游资讯</a> </li>
+                    <li class="on"><a href="./share.html">游记分享</a> </li>
+                    <li><a href="./customized.html">专属推荐</a> </li>
+                    <li><a href="./aboutUs.html">关于我们</a> </li>
+                </ul>
+            </div>
+            <div class="login_register">
+                <div class="searchdetails">
+                    <input type="text" class="search" placeholder="请输入搜索内容">
+                    <img src="./image/search.png" alt="">
+                </div>
+                <div class="allregister">
+                    <span class="login">登录</span>
+                    <span class="register" onclick="window.open('./register.html')">注册</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    
+    <div class="contence">
+        <p class="home"><a href="./main.html">首页</a>><span>游记分享</span></p>
+        <!-- <div class="online_search">
+            <div class="selectjob">资讯</div>
+            <input type="text" class="search_word" id="keyword" placeholder="请输入您期望资讯的关键词" autocomplete="off">
+            <div class="tosee" onclick="searchCourse()">
+                <img src="./image/search_rgba.png" alt="">
+                <div>搜索</div>
+            </div> 
+        </div> -->
+        <div id="travlmess" class="travlmess">
+            <div class="rankingmessage">
+                <div class="module_title">游记榜单</div>
+                <div class="rankings" id="rankings">
+                    <a href="./shareDetails.html" target="_self" >
+                        <span class="title">和正确的人在一起（深度好文！）</span>
+                    </a>
+                    <a href="./shareDetails.html" target="_self">
+                        <span class="title">和正确的人在一起（深度好文！）</span>
+                    </a>
+                    <a href="./shareDetails.html" target="_self">
+                        <span class="title">和正确的人在一起（深度好文！）</span>
+                    </a>
+                    <a href="./shareDetails.html" target="_self">
+                        <span class="title">和正确的人在一起（深度好文！）</span>
+                    </a>
+                </div>
+            </div>
+            <div class="messages">
+                <div class="shraetop">
+                    <ul class="tablist">
+                        <li class="check">热门游记</li>
+                        <li>最新发表</li>
+                    </ul>
+                    <div class="towrite" onclick="window.open('./writeshare.html')"><span class="iconfont icon-edit"></span>写游记</div>
+                </div>
+                <ul class="messageEach">
+                     <li onclick="window.open('./shareDetails.html')">
+                        <img src="./image/hot.jpg" alt="“伪旅行”，正在掏空当代中国人！">
+                        <div class="text_mess">
+                            <p class="title_content">“伪旅行”，正在掏空当代中国人！</p>
+                            <p class="messscontent">当你老了，回看自己的一生，才发现似乎一直都在上演着“错过”。10岁时，我们总会羡慕20岁的人，因为他们能买的起我们买不起的玩具;可当我们能买得起当年 ...</p>
+                            <p class="createtime">
+                                <span>2019-06-11</span> 
+                                <span class="like">
+                                    <img src="./image/gray_like.png" alt="">
+                                    <span>12</span>
+                                </span>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./image/hot.jpg" alt="“伪旅行”，正在掏空当代中国人！">
+                        <div class="text_mess">
+                            <p class="title_content">“伪旅行”，正在掏空当代中国人！</p>
+                            <p class="messscontent">当你老了，回看自己的一生，才发现似乎一直都在上演着“错过”。10岁时，我们总会羡慕20岁的人，因为他们能买的起我们买不起的玩具;可当我们能买得起当年 ...</p>
+                            <p class="createtime">
+                                <span>2019-06-11</span> 
+                                <span class="like">
+                                    <img src="./image/gray_like.png" alt="">
+                                    <span>12</span>
+                                </span>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./image/hot.jpg" alt="“伪旅行”，正在掏空当代中国人！">
+                        <div class="text_mess">
+                            <p class="title_content">“伪旅行”，正在掏空当代中国人！</p>
+                            <p class="messscontent">当你老了，回看自己的一生，才发现似乎一直都在上演着“错过”。10岁时，我们总会羡慕20岁的人，因为他们能买的起我们买不起的玩具;可当我们能买得起当年 ...</p>
+                            <p class="createtime">
+                                <span>2019-06-11</span> 
+                                <span class="like">
+                                    <img src="./image/gray_like.png" alt="">
+                                    <span>12</span>
+                                </span>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="./image/hot.jpg" alt="“伪旅行”，正在掏空当代中国人！">
+                        <div class="text_mess">
+                            <p class="title_content">“伪旅行”，正在掏空当代中国人！</p>
+                            <p class="messscontent">当你老了，回看自己的一生，才发现似乎一直都在上演着“错过”。10岁时，我们总会羡慕20岁的人，因为他们能买的起我们买不起的玩具;可当我们能买得起当年 ...</p>
+                            <p class="createtime">
+                                <span>2019-06-11</span> 
+                                <span class="like">
+                                    <img src="./image/gray_like.png" alt="">
+                                    <span>12</span>
+                                </span>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+     <!-- 登录 -->
+     <div class="loginback">
+        <div class="logincontent">
+            <img src="./image/close.png" alt="" class="close">
+            <p class="login_title"><span>兴游网</span> 登录</p>
+            <p class="login_intro">登录兴游网，寻找合适的旅游景区</p>
+            <div class="input ">
+                <label for="">账号：</label>
+                <input type="text" id="phone" class="phone" placeholder="请输入账号/手机号">
+            </div>
+            <div class="input togglebar">
+                <label for="">密码：</label>
+                <input type="password" id="password" class="code" placeholder="请输入密码" autocomplete="new-password">
+                <div class="hide"></div>
+            </div>
+            <div class="login_other">
+                <div class="other_way ">
+                    <span>没有账号？<a href="./register.html"> 立即注册</a></span>
+                </div>
+                <div class="forget"><a href="./forget/forgetPass.html">忘记密码？</a></div>
+            </div>
+            <div class="tologin" onclick="userlogin()">登录</div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="./script/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="./script/rem.js"></script>
+<script type="text/javascript" src="./script/paging.js"></script>
+<script type="text/javascript" src="./script/template-native.js"></script>
+<script type="text/javascript" src="./js/footer_evelator.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/html" id="shares">
+    <%for(var i=0;i< list.length;i++){%>
+        <li onclick="window.open('./shareDetails.html?id=<%=list[i].id%>')">
+            <img src="<%=list[i].cover%>" alt="<%=list[i].title%>" onerror="thos.src='./image/hot.jpg'">
+            <div class="text_mess">
+                <p class="title_content"><%=list[i].title%></p>
+                <p class="messscontent"><%=list[i].content%></p>
+                <p class="createtime">
+                    <span><%=list[i].ctime%></span> 
+                    <span class="like">
+                        <img src="./image/gray_like.png" alt="">
+                        <span>12</span>
+                    </span>
+                </p>
+            </div>
+        </li>
+    <%}%>
+</script>
+<script>
+    document.body.style.visibility='visible'
+    var index=
+    $(function(){
+        $(".navlist>li").eq(3).addClass("on");
+        index= $(".navlist>li.on").index()
+        share()
+    })
+
+    // 游记分享
+    function share(){
+        ajaxData.ajaxGetData('product/shares',{},function(ret){
+            if(ret){
+                var html=template("shares",{list:ret.data})
+                $(".messageEach").html(html)
+            }
+        })
+    }
+
+    $(".navlist>li").hover(
+        function(){
+            $(".navlist>li").removeClass("on").eq($(this).index()).addClass("on");
+            $(".navlist>li").eq(index).addClass("on");
+        },function(){
+            $(".navlist>li").removeClass("on").eq(index).addClass("on");
+        }
+    )
+
+    $(".tablist>li").click(function(){
+        $(".tablist>li").removeClass("check").eq($(this).index()).addClass("check")
+    })
+</script>
+</body>
+</html>
