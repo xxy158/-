@@ -50,8 +50,8 @@ var html=`<!-- 底部 -->
 </div>
 <!-- 侧边栏 -->
 <div class="evelator">
-    <div class="first">
-        <a href="./customized.html">专属<br>推荐</a>
+    <div class="first" onclick="canopen()">
+        <a href="javascript:void(0)">专属<br>推荐</a>
     </div>
     <div>
         <a href="javascript:void(0)" class="hoverdisp">
@@ -87,7 +87,7 @@ var html1=`<div class="header">
             <li><a href="./recomment.html">热门推荐</a> </li>
             <li><a href="./message.html">旅游资讯</a> </li>
             <li><a href="./share.html">游记分享</a> </li>
-            <li><a href="./customized.html">专属推荐</a> </li>
+            <li onclick="canopen()"><a href="javascript:void(0)">专属推荐</a> </li>
             <li><a href="./aboutUs.html">关于我们</a> </li>
         </ul>
     </div>
@@ -188,6 +188,14 @@ $(".hide").click(function(){
 function toAdvice(){
     window.open("./aboutUs.html?which=1");
 }
+// 跳转专属推荐
+function canopen(){
+    if(users){
+        window.open('./customized.html')
+    }else{
+        layer.msg("请登录后使用")
+    }
+}
 // 聚焦搜索
 $("#tosearch").click(function(){
     window.open('./recomment.html?onfocus='+true,'_self');
@@ -218,7 +226,8 @@ function userlogin(){
         dataType: "json",
         success: function(result) {
             sessionStorage.clear();
-            users=sessionStorage.setItem("users", JSON.stringify(result.data));
+            sessionStorage.setItem("users", JSON.stringify(result.data));
+            users=JSON.parse(sessionStorage.getItem("users"))[0];
             if(result.success){
                 layer.msg(result.msg)
                 $(".loginback").hide()    //登录背景隐藏
@@ -234,7 +243,11 @@ function userlogin(){
 // 头部的搜索
 $("#dosearch").click(function(){
     var key=$("#cansearch").val();
-    window.open("./recomment.html?keyword="+key,'_self');
+    if(key){
+        window.open("./recomment.html?keyword="+key,'_self');
+    }else{
+        layer.msg("请输入您想要搜索的内容")
+    }
 })
 $("#cansearch").keypress(function(e){
     var keycode = e.keyCode;

@@ -50,7 +50,7 @@ router.post("/login", (req, res) => {  //select
                         if (err) throw err;
                         else {
                             if (result.length == 0) {
-                                res.json({ success: false, msg: "密码错误，请重新登录" });
+                                res.json({ success: false, msg: "登录失败" });
                                 res.end();
                             } else {
                                 res.json({ success: true, msg: "登录成功", data: result });
@@ -133,7 +133,7 @@ router.post("/getusers", (req, res) => {  //update
         pool.getConnection((err, conn) => {
             if (err) throw err;
             let params = req.body;
-            var sql = "insert into recomjingqus(uid,recomaddress,recomname,recombecause) values(?,?,?,?)"
+            var sql = "insert into recomscenic(uid,recomaddress,recomname,recombecause) values(?,?,?,?)"
             conn.query(sql, [params.uid,params.recomaddress, params.recomname, params.recombecause], (err, result) => {
                 if (err) throw err;
                 if (result.affectedRows > 0) {
@@ -153,17 +153,21 @@ router.get("/getjingqus", (req, res) => {
         let params = req.query;
         var sql 
         if(params&&params.keyword){
-            sql = `SELECT * FROM jingqu WHERE introduce LIKE '%${params.keyword}%';`;
+            sql = `SELECT * FROM scenic WHERE introduce LIKE '%${params.keyword}%';`;
         }else{
-            sql = "SELECT * FROM jingqu";
+            sql = "SELECT * FROM scenic";
         }
         console.log(JSON.stringify(params))
         // 从链接池中获取链接
         conn.query(sql, (err, result) => {
             if (err) throw err;
             if (result) {
+                if(result.length!=0){
+                    res.json({ success: true, data:result })
+                }else{
+                    res.json({ success: true, data:result ,msg:"暂无匹配内容"})
+                }
                 conn.release();
-                res.json({ success: true, data:result })
             }
         })
     })
@@ -179,15 +183,19 @@ router.get("/jingquCustomized", (req, res) => {
         var aihao=params.aihao?("aihao LIKE '%"+params.aihao+"%'"+(params.sheshi?" && ":"")):""
         var sheshi=params.sheshi?("sheshi LIKE '%"+params.sheshi+"%'"+(params.xiaofei?" && ":"")):""
         var xiaofei=params.xiaofei?("xiaofei LIKE '%"+params.xiaofei+"%';"):""
-        var sql = "SELECT * FROM jingqu WHERE "+huanjing+yinshi+jiaotong+aihao+sheshi+xiaofei;
+        var sql = "SELECT * FROM scenic WHERE "+huanjing+yinshi+jiaotong+aihao+sheshi+xiaofei;
         console.log(JSON.stringify(params))
         console.log(sql)
         // 从链接池中获取链接
         conn.query(sql, (err, result) => {
             if (err) throw err;
             if (result) {
+                if(result.length!=0){
+                    res.json({ success: true,msg:"提交成功", data:result })
+                }else{
+                    res.json({ success: true,msg:"提交成功,但暂无匹配内容", data:result })
+                }
                 conn.release();
-                res.json({ success: true,msg:"提交成功", data:result })
             }
         })
     })

@@ -794,7 +794,7 @@
                     <li><a href="./recomment.html">热门推荐</a> </li>
                     <li><a href="./message.html">旅游资讯</a> </li>
                     <li><a href="./share.html">游记分享</a> </li>
-                    <li><a href="./customized.html">专属推荐</a> </li>
+                    <li onclick="canopen()"><a href="javascript:void(0)">专属推荐</a> </li>
                     <li><a href="./aboutUs.html">关于我们</a> </li>
                 </ul>
             </div>
@@ -994,8 +994,8 @@
     </div>
     <!-- 侧边栏 -->
     <div class="evelator">
-        <div class="first">
-            <a href="./customized.html">专属<br>推荐</a>
+        <div class="first" onclick="canopen()">
+            <a href="javascript:void(0)">专属<br>推荐</a>
         </div>
         <div>
             <a href="javascript:void(0)" class="hoverdisp">
@@ -1138,6 +1138,14 @@
                 $(".navlist>li").removeClass("on").eq(index).addClass("on");
             }
         )
+        // 跳转专属推荐
+        function canopen(){
+            if(users){
+                window.open('./customized.html')
+            }else{
+                layer.msg("请登录后使用")
+            }
+        }
         //轮播图 
         function lunbo(){
             var mySwiper = new Swiper('.swiper-container', {
@@ -1216,7 +1224,7 @@
                 success: function(ret) {
                     console.log(ret)
                     sessionStorage.setItem("users", JSON.stringify(ret.data));
-                    
+                    users =JSON.parse(sessionStorage.getItem("users"))[0];
                     //sessionStorage.clear();
                     if(ret.success){
                         layer.msg(ret.msg)
