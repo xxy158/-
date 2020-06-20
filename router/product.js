@@ -24,7 +24,6 @@ router.post("/register", (req, res) => {  //insert
                         } else {
                             res.json({ success: false, msg: "注册失败" })
                         }
-                        conn.release();
                     });
                 }
                 conn.release();
@@ -71,21 +70,11 @@ router.post("/editusers", (req, res) => {  //update
         let params = req.body;
         console.log(JSON.stringify(params))
         var sql = "UPDATE users SET icon=?, name=? WHERE id=?";
-        pool.query(sql, [params.icon, params.name,1], (err, result) => {
+        pool.query(sql, [params.icon, params.name,params.uid], (err, result) => {
             if (err) throw err;
             console.log(JSON.stringify(result))
             if (result.affectedRows > 0) {
                 res.json({ success:true, msg: "更新成功"})
-                // var sql = "SELECT * FROM users where id=?"
-                // conn.query(sql, [params.id], (err, result) => {
-                //     if (err) throw err;
-                //     else {
-                //         if (result.length == 0) {
-                //         res.json({ success:true, msg: "注册成功" , ret:result })
-                //     } else {
-                //         res.json({ success: false, msg: "注册失败" })
-                //     }
-                // });
             } else {
                 res.json({ success: false, msg: "更新失败" })
             }
@@ -103,8 +92,8 @@ router.post("/getusers", (req, res) => {  //update
         conn.query(sql, params.id, (err, result) => {
             if (err) throw err;
             else {
-                conn.release();
                 res.json({ success: true, data:result})
+                conn.release();
                 res.end()
             }
         })
@@ -119,12 +108,11 @@ router.post("/getusers", (req, res) => {  //update
             conn.query(sql, [params.uid,params.type, params.content], (err, result) => {
                 if (err) throw err;
                 if (result.affectedRows > 0) {
-                    conn.release();
                     res.json({ success:true, msg: "反馈成功" })
                 } else {
-                    conn.release();
                     res.json({ success: false, msg: "反馈失败" })
                 }
+                conn.release();
             });
         })
     })
@@ -137,12 +125,11 @@ router.post("/getusers", (req, res) => {  //update
             conn.query(sql, [params.uid,params.recomaddress, params.recomname, params.recombecause], (err, result) => {
                 if (err) throw err;
                 if (result.affectedRows > 0) {
-                    conn.release();
                     res.json({ success:true, msg: "感谢您的推荐，我们会尽快处理您的推荐" })
                 } else {
-                    conn.release();
                     res.json({ success: false, msg: "推荐失败" })
                 }
+                conn.release();
             });
         })
     })
@@ -177,10 +164,10 @@ router.get("/jingquCustomized", (req, res) => {
     pool.getConnection((err, conn) => {
         if (err) throw err;
         let params = req.query;
-        var huanjing=params.huanjing?("huanjing LIKE '%"+params.huanjing+"%'"+(params.yinshi?" && ":"")):""
-        var yinshi=params.yinshi?("yinshi LIKE '%"+params.yinshi+"%'"+(params.jiaotong?" && ":"")):""
-        var jiaotong=params.jiaotong?("jiaotong LIKE '%"+params.jiaotong+"%'"+(params.aihao?" && ":"")):""
-        var aihao=params.aihao?("aihao LIKE '%"+params.aihao+"%'"+(params.sheshi?" && ":"")):""
+        var huanjing=params.huanjing?("huanjing LIKE '%"+params.huanjing+"%'"+(params.yinshi||params.jiaotong||params.aihao||params.sheshi||params.xiaofei?" && ":"")):""
+        var yinshi=params.yinshi?("yinshi LIKE '%"+params.yinshi+"%'"+(params.jiaotong||params.aihao||params.sheshi||params.xiaofei?" && ":"")):""
+        var jiaotong=params.jiaotong?("jiaotong LIKE '%"+params.jiaotong+"%'"+(params.aihao||params.sheshi||params.xiaofei?" && ":"")):""
+        var aihao=params.aihao?("aihao LIKE '%"+params.aihao+"%'"+(params.sheshi||params.xiaofei?" && ":"")):""
         var sheshi=params.sheshi?("sheshi LIKE '%"+params.sheshi+"%'"+(params.xiaofei?" && ":"")):""
         var xiaofei=params.xiaofei?("xiaofei LIKE '%"+params.xiaofei+"%';"):""
         var sql = "SELECT * FROM scenic WHERE "+huanjing+yinshi+jiaotong+aihao+sheshi+xiaofei;
@@ -226,12 +213,11 @@ router.post("/sharesAdd", (req, res) => {
         conn.query(sql, [params.uid,params.cover,params.title, params.content,params.ctime], (err, result) => {
             if (err) throw err;
             if (result.affectedRows > 0) {
-                conn.release();
                 res.json({ success:true, msg: "发表成功" })
             } else {
-                conn.release();
                 res.json({ success: false, msg: "发表失败" })
             }
+            conn.release();
         });
     })
 })

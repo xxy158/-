@@ -399,17 +399,9 @@ label {
     object-fit: cover;
 }
 /* 我的头像拉下列表 */
-.xiala{
-    display: none;
-    position: absolute;
-    right: -0.2rem;
-    top: 0.6rem;
-    width: 2.3rem;
-    background: url(../image/mine.png) no-repeat;
-    background-size: contain;
-    z-index: 2000;
-}
+
 .listxiala{
+    display: none;
     cursor: pointer;
     padding: 0 0.4rem 0 0.4rem;
     font-size:0.2rem;
@@ -418,6 +410,14 @@ label {
     color:rgba(52,52,52,1);
     letter-spacing:1px;
     text-align: center;
+    position: absolute;
+    right: 0rem;
+    top: 0.7rem;
+    width: 2.3rem;
+    box-sizing: border-box;
+    background: url(../image/mine.png) no-repeat;
+    background-size: contain;
+    z-index: 2000;
 }
 
 .listxiala li{

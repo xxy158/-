@@ -484,7 +484,7 @@
                 <li>商务部负责人</li> -->
             </ul>
         </div>
-        <div class="classify">
+        <!-- <div class="classify">
             <div class="kindsclass">课程分类：</div>
             <ul class="kindsof" id="coursekinds">
                 <li class="blue">全部</li>
@@ -500,7 +500,7 @@
                 <li>移动开发</li>
                 <li>定制开发</li>
             </ul>
-        </div>
+        </div> -->
         <div class="allcourses">
             <div class="recomment">
                 <ul class="recomeEach" id="recomeEach">
@@ -518,7 +518,7 @@
                 </ul>
             </div>
         </div>
-        <div class="yema">
+        <!-- <div class="yema">
             <div class="one">
                 <img src="./image/lastone.png" alt="">
             </div>
@@ -532,7 +532,7 @@
             <div class="lastone one">
                 <img src="./image/nextone.png" alt="">
             </div>
-        </div>
+        </div> -->
     </div>
      <!-- 登录 -->
      <div class="loginback">
@@ -568,7 +568,7 @@
 <script type="text/javascript" src="./js/common.js"></script>
 <script type="text/html" id="jingqu">
     <%for(var i=0;i< list.length;i++){%>
-        <li>
+        <li onclick="window.open('./recommentDetails.html?id=<%=list[i].id%>')">
             <div class="coursecover">
                 <img src="<%=list[i].cover%>" alt="" onerror="this.src='./image/hot.jpg'">
             </div>

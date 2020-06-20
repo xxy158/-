@@ -435,6 +435,18 @@
             padding-top: 0.07rem;
             color: #999;
         }
+
+        .hasno {
+            display: none;
+            text-align: center;
+            font-size: 0.36rem;
+            color: #2b2b2b;
+            padding-top: 0.7rem;
+        }
+        .footer.nolength{
+            position: absolute;
+            bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -470,7 +482,7 @@
         <div class="allcourses">
             <div class="recomment">
                 <ul class="recomeEach" id="recomeEach">
-                    <li onclick="window.open('./recommentDetails.html')">
+                    <!-- <li onclick="window.open('./recommentDetails.html')">
                         <div class="coursecover">
                             <img src="./image/hot.jpg" alt="">
                         </div>
@@ -479,12 +491,13 @@
                             <p class="price">￥187.00<span>起</span></p>
                             <p class="time">3天</p>
                         </div>
-                    </li>
+                    </li> -->
                     
                 </ul>
+                <div class="hasno">暂无匹配结果</div>
             </div>
         </div>
-        <div class="yema">
+        <!-- <div class="yema">
             <div class="one">
                 <img src="./image/lastone.png" alt="">
             </div>
@@ -498,7 +511,7 @@
             <div class="lastone one">
                 <img src="./image/nextone.png" alt="">
             </div>
-        </div>
+        </div> -->
     </div>
      <!-- 登录 -->
      <div class="loginback">
@@ -534,7 +547,7 @@
 <script type="text/javascript" src="./js/common.js"></script>
 <script type="text/html" id="jingqu">
     <%for(var i=0;i< list.length;i++){%>
-        <li>
+        <li onclick="window.open('./recommentDetails.html?id=<%=list[i].id%>')">
             <div class="coursecover">
                 <img src="<%=list[i].cover%>" alt="" onerror="this.src='./image/hot.jpg'">
             </div>
@@ -550,10 +563,17 @@
     document.body.style.visibility='visible'
     var result
     $(function(){
-        result=xUtils.getQueryString("result");
-        jingqu(JSON.parse(result))
-
+        result=JSON.parse(sessionStorage.getItem("customizedResult"));
+        if(result.length==0){
+            $(".hasno").show()
+            // setTimeout(function(){
+                $(".footer").addClass("nolength")
+            // }, 100);
+        }else{
+            jingqu(result);
+        }
     })
+    
     $(".navlist>li").hover(
         function(){
             $(".navlist>li").removeClass("on").eq($(this).index()).addClass("on");

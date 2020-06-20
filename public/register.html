@@ -494,7 +494,7 @@
                         <input type="text" id="telphone" placeholder="请输入手机号码">
                     </div>
                     <div class="inpunewpass passwordNum">
-                        <input type="password" id="pass" placeholder="请输入密码">
+                        <input type="password" id="pass" placeholder="请输入密码（6位及以上数字或字母组合）">
                         <div class="hide"></div>
                     </div>
                     <div class="selectjob">
@@ -549,9 +549,11 @@
         $(".canchoose").slideToggle(100)
         $(".selectsub").val($(this).text());
     })
+    var can
     $(".check").click(function(){
         if(!$(".check").attr("checked")){
             $(".besure").addClass("nochecked")
+            can=true
         }else{
             $(".besure").removeClass("nochecked")
         }
@@ -573,11 +575,22 @@
             //字符串拼接 将每次随机的字符 进行拼接
             code += random[index]; 
         }
+        // //使用字符串获取的方式
+        // var strnum='0123456789abcdzfghigklmnopqrstuvwxz'
+        // for(var i=0;i<codeLength;i++){
+        //     // random()  [0,1)
+        //     code+=  strnum.charAt(Math.floor(Math.random()*strnum.length))
+        // }
         //将拼接好的字符串赋值给展示的Value
         $("#code").val(code)
     }
+
     // 注册提交
     function register() {
+        if(can){
+            layer.msg("请阅读并同意相关服务条款")
+            return
+        }
         var params={}
         params.telphone=$("#telphone").val()
         params.password=$("#pass").val()
@@ -593,6 +606,11 @@
         }
         if(!params.password){
             layer.msg("请输入密码")
+            return
+        }
+        var pass = /^[0-9a-zA-Z]{6,}$/;
+        if(!pass.test(params.password)){
+            layer.msg("请输入正确格式的密码")
             return
         }
         if(!$("#writecode").val()){
@@ -611,7 +629,9 @@
             success : function (result) {
                 if(result.success){
                     layer.msg(result.msg)
-                    location.href="./main.html";
+                    setTimeout(() => {
+                        location.href="./main.html?canlogin=1";
+                    }, 400);
                 }else{
                     layer.msg(result.msg)
                 }

@@ -493,7 +493,7 @@
                                 <span>2019-06-11</span> 
                                 <span class="like">
                                     <img src="./image/gray_like.png" alt="">
-                                    <span>12</span>
+                                    <span>0</span>
                                 </span>
                             </p>
                         </div>
@@ -507,7 +507,7 @@
                                 <span>2019-06-11</span> 
                                 <span class="like">
                                     <img src="./image/gray_like.png" alt="">
-                                    <span>12</span>
+                                    <span>0</span>
                                 </span>
                             </p>
                         </div>
@@ -559,7 +559,7 @@
                     <span><%=list[i].ctime%></span> 
                     <span class="like">
                         <img src="./image/gray_like.png" alt="">
-                        <span>12</span>
+                        <span>0</span>
                     </span>
                 </p>
             </div>
@@ -568,7 +568,7 @@
 </script>
 <script>
     document.body.style.visibility='visible'
-    var index=
+    var index
     $(function(){
         $(".navlist>li").eq(3).addClass("on");
         index= $(".navlist>li.on").index()
@@ -576,10 +576,30 @@
     })
 
     // 游记分享
-    function share(){
+    function share(bool){
         ajaxData.ajaxGetData('product/shares',{},function(ret){
             if(ret){
-                var html=template("shares",{list:ret.data})
+                var arrs=[]
+                var alllist={}
+                ret.data=ret.data.reverse()
+                alllist.list=ret.data
+                if(bool){
+                    var year=new Date().getFullYear();
+                    var month=new Date().getMonth()+1;
+                    var day=new Date().getDate();
+                    console.log(year+".."+month+"..."+day)
+                    for(var i=0;i<ret.data.length;i++){
+                        var cyear=new Date(ret.data[i].ctime).getFullYear()
+                        var cmonth=new Date(ret.data[i].ctime).getMonth()+1
+                        var ctime=new Date(ret.data[i].ctime).getDate()
+                        console.log(cyear+".."+cmonth+"..."+ctime)
+                        if(year==cyear&&month==cmonth&&day==ctime){
+                            arrs.push(ret.data[i]);
+                        }
+                    }
+                    alllist.list=arrs
+                }
+                var html=template("shares",alllist)
                 $(".messageEach").html(html)
             }
         })
@@ -595,7 +615,13 @@
     )
 
     $(".tablist>li").click(function(){
-        $(".tablist>li").removeClass("check").eq($(this).index()).addClass("check")
+        $(".tablist>li").removeClass("check").eq($(this).index()).addClass("check");
+        if($(this).index()==1){
+            console.log(1)
+            share(true)
+        }else{
+            share()
+        }
     })
 </script>
 </body>

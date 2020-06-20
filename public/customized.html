@@ -336,8 +336,10 @@ textarea::placeholder{
         ajaxData.ajaxGetData('product/jingquCustomized',params,function(ret){
             if(ret){
                 layer.msg(ret.msg+"，即将跳转结果页")
+                sessionStorage.setItem("customizedResult", JSON.stringify(ret.data));
+                console.log(sessionStorage.getItem("customizedResult"))
                 setTimeout(() => {
-                    window.open('./customizedResult.html?result='+JSON.stringify(ret.data));
+                    window.open('./customizedResult.html');
                 }, 500);
             }
         })

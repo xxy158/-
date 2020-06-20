@@ -102,14 +102,12 @@ var html1=`<div class="header">
         </div>
         <div class="has_login">
             <img src="./image/header.jpg" alt="" onerror="this.src='./image/header.jpg'">
-            <div class="xiala">
-                <!-- 消息下拉 -->
-                <ul class="listxiala">
-                    <li><a href="./mine.html">修改个人信息</a></li>
-                    <li><a href="./aboutUs.html?which=1">留言反馈</a></li>
-                    <li><a href="#" onclick="exitlogin()">退出登录</a></li>
-                </ul>
-            </div>
+            <!-- 消息下拉 -->
+            <ul class="listxiala">
+                <li><a href="./mine.html">修改个人信息</a></li>
+                <li><a href="./aboutUs.html?which=1">留言反馈</a></li>
+                <li><a href="#" onclick="exitlogin()">退出登录</a></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -131,9 +129,9 @@ function icon(){
 
 $(".has_login").hover(
     function(){
-        $(".xiala").slideDown(200)
+        $(".listxiala").show()
     },function() {
-        $(".xiala").slideUp(200)
+        $(".listxiala").hide()
     }
 )
 // 退出登录
